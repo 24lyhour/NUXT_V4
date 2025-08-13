@@ -1,10 +1,28 @@
+<script setup lang="ts">
+import { Menu, Bell, User, CreditCard, Settings, LogOut } from 'lucide-vue-next'
+import AppSidebar from '../components/app-sidebar.vue'
+
+const route = useRoute()
+
+const pageTitle = computed(() => {
+  const path = route.path
+  if (path === '/') return 'Dashboard'
+  if (path === '/customers') return 'Customers'
+  if (path === '/products') return 'Products'
+  if (path === '/orders') return 'Orders'
+  if (path === '/analytics') return 'Analytics'
+  if (path === '/settings') return 'Settings'
+  return 'Dashboard'
+})
+</script>
+
 <template>
   <div class="flex h-screen overflow-hidden bg-background">
     <!-- Sidebar -->
     <div class="hidden md:flex">
       <AppSidebar />
     </div>
-    
+
     <!-- Main content -->
     <div class="flex flex-1 flex-col">
       <!-- Header -->
@@ -20,16 +38,16 @@
             <AppSidebar />
           </SheetSheetContent>
         </SheetSheet>
-        
+
         <div class="flex flex-1 items-center justify-between">
           <h1 class="text-lg font-semibold md:text-xl">{{ pageTitle }}</h1>
-          
+
           <div class="flex items-center gap-4">
             <Button variant="ghost" size="icon">
               <Bell class="h-5 w-5" />
               <span class="sr-only">Notifications</span>
             </Button>
-            
+
             <DropdownMenuDropdownMenu>
               <DropdownMenuDropdownMenuTrigger asChild>
                 <Button variant="ghost" class="relative h-8 w-8 rounded-full">
@@ -71,7 +89,7 @@
           </div>
         </div>
       </header>
-      
+
       <!-- Page content -->
       <main class="flex-1 overflow-y-auto">
         <div class="container py-6">
@@ -81,21 +99,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { Menu, Bell, User, CreditCard, Settings, LogOut } from 'lucide-vue-next'
-import AppSidebar from '../components/app-sidebar.vue'
-
-const route = useRoute()
-
-const pageTitle = computed(() => {
-  const path = route.path
-  if (path === '/') return 'Dashboard'
-  if (path === '/customers') return 'Customers'
-  if (path === '/products') return 'Products'
-  if (path === '/orders') return 'Orders'
-  if (path === '/analytics') return 'Analytics'
-  if (path === '/settings') return 'Settings'
-  return 'Dashboard'
-})
-</script>
