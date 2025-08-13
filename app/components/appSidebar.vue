@@ -1,7 +1,7 @@
 <template>
-  <SidebarSidebar :className="cn('border-r', className)">
-    <SidebarSidebarHeader>
-      <SidebarSidebarMenuButton size="lg" asChild>
+  <Sidebar :className="cn('border-r', className)">
+    <SidebarHeader>
+      <SidebarMenuButton size="lg" asChild>
         <a href="/">
           <div class="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <Package class="size-4" />
@@ -11,89 +11,89 @@
             <span class="text-xs text-muted-foreground">v1.0.0</span>
           </div>
         </a>
-      </SidebarSidebarMenuButton>
-    </SidebarSidebarHeader>
+      </SidebarMenuButton>
+    </SidebarHeader>
     
-    <SidebarSidebarContent>
-      <SidebarSidebarGroup>
-        <SidebarSidebarGroupLabel>Application</SidebarSidebarGroupLabel>
-        <SidebarSidebarGroupContent>
-          <SidebarSidebarMenu>
-            <SidebarSidebarMenuItem v-for="item in applicationItems" :key="item.title">
-              <SidebarSidebarMenuButton asChild :isActive="route.path === item.url">
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Application</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem v-for="item in applicationItems" :key="item.title">
+              <SidebarMenuButton asChild :isActive="route.path === item.url">
                 <NuxtLink :to="item.url">
                   <component :is="item.icon" class="size-4" />
                   <span>{{ item.title }}</span>
                 </NuxtLink>
-              </SidebarSidebarMenuButton>
-            </SidebarSidebarMenuItem>
-          </SidebarSidebarMenu>
-        </SidebarSidebarGroupContent>
-      </SidebarSidebarGroup>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
 
-      <SidebarSidebarGroup>
-        <SidebarSidebarGroupLabel>Analytics</SidebarSidebarGroupLabel>
-        <SidebarSidebarGroupContent>
-          <SidebarSidebarMenu>
-            <CollapsibleCollapsible v-for="item in analyticsItems" :key="item.title" class="group/collapsible">
-              <SidebarSidebarMenuItem>
-                <CollapsibleCollapsibleTrigger asChild>
-                  <SidebarSidebarMenuButton>
+      <SidebarGroup>
+        <SidebarGroupLabel>Analytics</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <Collapsible v-for="item in analyticsItems" :key="item.title" class="group/collapsible">
+              <SidebarMenuItem>
+                <CollapsibleTrigger asChild>
+                  <SidebarMenuButton>
                     <component :is="item.icon" class="size-4" />
                     <span>{{ item.title }}</span>
                     <ChevronRight class="ml-auto size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                  </SidebarSidebarMenuButton>
-                </CollapsibleCollapsibleTrigger>
-                <CollapsibleCollapsibleContent>
-                  <SidebarSidebarMenu class="ml-4 mt-1">
-                    <SidebarSidebarMenuItem v-for="subItem in item.items" :key="subItem.title">
-                      <SidebarSidebarMenuButton asChild :isActive="route.path === subItem.url">
+                  </SidebarMenuButton>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <SidebarMenu class="ml-4 mt-1">
+                    <SidebarMenuItem v-for="subItem in item.items" :key="subItem.title">
+                      <SidebarMenuButton asChild :isActive="route.path === subItem.url">
                         <NuxtLink :to="subItem.url">
                           <span>{{ subItem.title }}</span>
                         </NuxtLink>
-                      </SidebarSidebarMenuButton>
-                    </SidebarSidebarMenuItem>
-                  </SidebarSidebarMenu>
-                </CollapsibleCollapsibleContent>
-              </SidebarSidebarMenuItem>
-            </CollapsibleCollapsible>
-          </SidebarSidebarMenu>
-        </SidebarSidebarGroupContent>
-      </SidebarSidebarGroup>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  </SidebarMenu>
+                </CollapsibleContent>
+              </SidebarMenuItem>
+            </Collapsible>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
 
-      <SidebarSidebarGroup>
-        <SidebarSidebarGroupLabel>Settings</SidebarSidebarGroupLabel>
-        <SidebarSidebarGroupContent>
-          <SidebarSidebarMenu>
-            <SidebarSidebarMenuItem v-for="item in settingsItems" :key="item.title">
-              <SidebarSidebarMenuButton asChild :isActive="route.path === item.url">
+      <SidebarGroup>
+        <SidebarGroupLabel>Settings</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem v-for="item in settingsItems" :key="item.title">
+              <SidebarMenuButton asChild :isActive="route.path === item.url">
                 <NuxtLink :to="item.url">
                   <component :is="item.icon" class="size-4" />
                   <span>{{ item.title }}</span>
                 </NuxtLink>
-              </SidebarSidebarMenuButton>
-            </SidebarSidebarMenuItem>
-          </SidebarSidebarMenu>
-        </SidebarSidebarGroupContent>
-      </SidebarSidebarGroup>
-    </SidebarSidebarContent>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </SidebarContent>
 
     <div class="mt-auto p-4">
-      <CardCard>
-        <CardCardHeader class="p-3">
-          <CardCardTitle class="text-sm">Upgrade to Pro</CardCardTitle>
-        </CardCardHeader>
-        <CardCardContent class="p-3 pt-0">
+      <Card>
+        <CardHeader class="p-3">
+          <CardTitle class="text-sm">Upgrade to Pro</CardTitle>
+        </CardHeader>
+        <CardContent class="p-3 pt-0">
           <p class="text-xs text-muted-foreground mb-3">
             Unlock all features and get unlimited access to our support team.
           </p>
           <Button size="sm" class="w-full">
             Upgrade
           </Button>
-        </CardCardContent>
-      </CardCard>
+        </CardContent>
+      </Card>
     </div>
-  </SidebarSidebar>
+  </Sidebar>
 </template>
 
 <script setup lang="ts">
