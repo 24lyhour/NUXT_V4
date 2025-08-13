@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Menu, Bell, User, CreditCard, Settings, LogOut } from 'lucide-vue-next'
-import AppSidebar from '../components/app-sidebar.vue'
+import AppSidebar from '../components/appSidebar.vue'
 
 const route = useRoute()
 
