@@ -27,17 +27,17 @@ const pageTitle = computed(() => {
     <div class="flex flex-1 flex-col">
       <!-- Header -->
       <header class="sticky top-0 z-40 flex h-16 items-center gap-4 border-b bg-background px-6">
-        <SheetSheet>
-          <SheetSheetTrigger asChild>
+        <Sheet>
+          <SheetTrigger asChild>
             <Button variant="outline" size="icon" class="md:hidden">
               <Menu class="h-5 w-5" />
               <span class="sr-only">Toggle menu</span>
             </Button>
-          </SheetSheetTrigger>
-          <SheetSheetContent side="left" class="p-0 w-72">
+          </SheetTrigger>
+          <SheetContent side="left" class="p-0 w-72">
             <AppSidebar />
-          </SheetSheetContent>
-        </SheetSheet>
+          </SheetContent>
+        </Sheet>
 
         <div class="flex flex-1 items-center justify-between">
           <h1 class="text-lg font-semibold md:text-xl">{{ pageTitle }}</h1>
@@ -48,44 +48,44 @@ const pageTitle = computed(() => {
               <span class="sr-only">Notifications</span>
             </Button>
 
-            <DropdownMenuDropdownMenu>
-              <DropdownMenuDropdownMenuTrigger asChild>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
                 <Button variant="ghost" class="relative h-8 w-8 rounded-full">
-                  <AvatarAvatar class="h-8 w-8">
-                    <AvatarAvatarImage src="/avatars/01.png" alt="@user" />
-                    <AvatarAvatarFallback>U</AvatarAvatarFallback>
-                  </AvatarAvatar>
+                  <Avatar class="h-8 w-8">
+                    <AvatarImage src="/avatars/01.png" alt="@user" />
+                    <AvatarFallback>U</AvatarFallback>
+                  </Avatar>
                 </Button>
-              </DropdownMenuDropdownMenuTrigger>
-              <DropdownMenuDropdownMenuContent class="w-56" align="end" forceMount>
-                <DropdownMenuDropdownMenuItem class="font-normal">
+              </DropdownMenuTrigger>
+              <DropdownMenuContent class="w-56" align="end" forceMount>
+                <DropdownMenuItem class="font-normal">
                   <div class="flex flex-col space-y-1">
                     <p class="text-sm font-medium leading-none">user@example.com</p>
                     <p class="text-xs leading-none text-muted-foreground">
                       Admin User
                     </p>
                   </div>
-                </DropdownMenuDropdownMenuItem>
-                <DropdownMenuDropdownMenuSeparator />
-                <DropdownMenuDropdownMenuItem>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
                   <User class="mr-2 h-4 w-4" />
                   <span>Profile</span>
-                </DropdownMenuDropdownMenuItem>
-                <DropdownMenuDropdownMenuItem>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
                   <CreditCard class="mr-2 h-4 w-4" />
                   <span>Billing</span>
-                </DropdownMenuDropdownMenuItem>
-                <DropdownMenuDropdownMenuItem>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
                   <Settings class="mr-2 h-4 w-4" />
                   <span>Settings</span>
-                </DropdownMenuDropdownMenuItem>
-                <DropdownMenuDropdownMenuSeparator />
-                <DropdownMenuDropdownMenuItem>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
                   <LogOut class="mr-2 h-4 w-4" />
                   <span>Log out</span>
-                </DropdownMenuDropdownMenuItem>
-              </DropdownMenuDropdownMenuContent>
-            </DropdownMenuDropdownMenu>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </header>

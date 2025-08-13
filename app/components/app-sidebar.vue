@@ -104,14 +104,13 @@ import {
   ShoppingCart, 
   Package2,
   BarChart3,
-  TrendingUp,
   FileText,
   ChevronRight,
   Settings,
   HelpCircle,
   CreditCard
 } from 'lucide-vue-next'
-import { cn } from '../lib/utils'
+import { cn } from '~/lib/utils'
 
 const route = useRoute()
 
