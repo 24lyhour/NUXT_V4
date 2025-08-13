@@ -18,7 +18,7 @@
 import { CheckboxIndicator, CheckboxRoot, useForwardPropsEmits } from 'radix-vue'
 import type { CheckboxRootEmits, CheckboxRootProps } from 'radix-vue'
 import { Check } from 'lucide-vue-next'
-import { cn } from '@/app/lib/utils'
+import { cn } from '~/lib/utils'
 
 const props = defineProps<CheckboxRootProps>()
 const emits = defineEmits<CheckboxRootEmits>()

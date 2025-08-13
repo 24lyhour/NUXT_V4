@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { AccordionContent } from 'radix-vue'
 import type { AccordionContentProps } from 'radix-vue'
-import { cn } from '@/app/lib/utils'
+import { cn } from '~/lib/utils'
 
 const props = defineProps<AccordionContentProps>()
 </script>

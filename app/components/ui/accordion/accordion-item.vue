@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { AccordionItem } from 'radix-vue'
 import type { AccordionItemProps } from 'radix-vue'
-import { cn } from '@/app/lib/utils'
+import { cn } from '~/lib/utils'
 
 const props = defineProps<AccordionItemProps>()
 </script>

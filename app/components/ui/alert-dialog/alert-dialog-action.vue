@@ -11,7 +11,7 @@
 import { AlertDialogAction } from 'radix-vue'
 import type { AlertDialogActionProps } from 'radix-vue'
 import { buttonVariants } from '@/app/components/ui/button'
-import { cn } from '@/app/lib/utils'
+import { cn } from '~/lib/utils'
 
 const props = defineProps<AlertDialogActionProps>()
 </script>

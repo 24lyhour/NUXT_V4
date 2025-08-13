@@ -26,7 +26,7 @@ import {
   useForwardPropsEmits,
 } from 'radix-vue'
 import type { AlertDialogContentEmits, AlertDialogContentProps } from 'radix-vue'
-import { cn } from '@/app/lib/utils'
+import { cn } from '~/lib/utils'
 
 interface DialogContentProps extends AlertDialogContentProps {
   overlayClass?: string
