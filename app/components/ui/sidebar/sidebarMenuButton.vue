@@ -1,29 +1,48 @@
-<template>
-  <component
-    :is="asChild ? 'div' : 'button'"
-    :class="cn(
-      'flex w-full items-center gap-2 rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-      size === 'sm' && 'px-2 py-1',
-      size === 'lg' && 'px-3 py-2',
-      (!size || size === 'default') && 'px-2 py-1.5',
-      isActive && 'bg-accent text-accent-foreground',
-      className
-    )"
-    v-bind="{ ...props, class: undefined, size: undefined }"
-  >
-    <slot />
-  </component>
-</template>
-
 <script setup lang="ts">
-import { cn } from '~/lib/utils'
+import type { Component } from "vue"
+import type { SidebarMenuButtonProps } from "./SidebarMenuButtonChild.vue"
+import { reactiveOmit } from "@vueuse/core"
+import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip'
+import SidebarMenuButtonChild from "./SidebarMenuButtonChild.vue"
+import { useSidebar } from "./utils"
 
-interface Props {
-  className?: string
-  asChild?: boolean
-  isActive?: boolean
-  size?: 'default' | 'sm' | 'lg'
-}
+defineOptions({
+  inheritAttrs: false,
+})
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<SidebarMenuButtonProps & {
+  tooltip?: string | Component
+}>(), {
+  as: "button",
+  variant: "default",
+  size: "default",
+})
+
+const { isMobile, state } = useSidebar()
+
+const delegatedProps = reactiveOmit(props, "tooltip")
 </script>
+
+<template>
+  <SidebarMenuButtonChild v-if="!tooltip" v-bind="{ ...delegatedProps, ...$attrs }">
+    <slot />
+  </SidebarMenuButtonChild>
+
+  <Tooltip v-else>
+    <TooltipTrigger as-child>
+      <SidebarMenuButtonChild v-bind="{ ...delegatedProps, ...$attrs }">
+        <slot />
+      </SidebarMenuButtonChild>
+    </TooltipTrigger>
+    <TooltipContent
+      side="right"
+      align="center"
+      :hidden="state !== 'collapsed' || isMobile"
+    >
+      <template v-if="typeof tooltip === 'string'">
+        {{ tooltip }}
+      </template>
+      <component :is="tooltip" v-else />
+    </TooltipContent>
+  </Tooltip>
+</template>

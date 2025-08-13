@@ -1,15 +1,18 @@
+<script setup lang="ts">
+import type { HTMLAttributes } from "vue"
+import { cn } from '~/lib/utils'
+
+const props = defineProps<{
+  class?: HTMLAttributes["class"]
+}>()
+</script>
+
 <template>
-  <li :class="cn('relative', className)">
+  <li
+    data-slot="sidebar-menu-item"
+    data-sidebar="menu-item"
+    :class="cn('group/menu-item relative', props.class)"
+  >
     <slot />
   </li>
 </template>
-
-<script setup lang="ts">
-import { cn } from '~/lib/utils'
-
-interface Props {
-  className?: string
-}
-
-const { className } = defineProps<Props>()
-</script>

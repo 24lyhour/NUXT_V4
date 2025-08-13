@@ -8,11 +8,10 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div
-    data-slot="sidebar-group-content"
-    data-sidebar="group-content"
-    :class="cn('w-full text-sm', props.class)"
+  <span
+    data-slot="dropdown-menu-shortcut"
+    :class="cn('text-muted-foreground ml-auto text-xs tracking-widest', props.class)"
   >
     <slot />
-  </div>
+  </span>
 </template>

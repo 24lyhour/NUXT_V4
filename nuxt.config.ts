@@ -10,16 +10,18 @@ export default defineNuxtConfig({
     '@': '.',
     '~/app': './app'
   },
-  components: {
-    dirs: [
-      {
-        path: './app/components',
-        pathPrefix: false,
-        global: true,
-        extensions: ['vue']
-      }
-    ]
-  },
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+      global: true
+    },
+    {
+      path: '~/components/ui',
+      pathPrefix: false,
+      global: true
+    }
+  ],
   vite: {
     plugins: [
       tailwindcss(),
