@@ -13,8 +13,9 @@ export default defineNuxtConfig({
   components: {
     dirs: [
       {
-        path: '~/app/components',
-        pathPrefix: false
+        path: './app/components',
+        pathPrefix: false,
+        global: true
       }
     ]
   },
