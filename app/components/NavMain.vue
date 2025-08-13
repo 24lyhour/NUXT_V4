@@ -35,9 +35,8 @@ defineProps<{
   <SidebarGroup>
     <SidebarGroupLabel>Platform</SidebarGroupLabel>
     <SidebarMenu>
-      <Collapsible v-for="item in items" :key="item.title" as-child :default-open="item.isActive"
-        class="group/collapsible">
-        <SidebarMenuItem>
+      <SidebarMenuItem v-for="item in items" :key="item.title">
+        <Collapsible v-if="item.items && item.items.length > 0" :default-open="false" class="group/collapsible">
           <CollapsibleTrigger as-child>
             <SidebarMenuButton :tooltip="item.title">
               <component :is="item.icon" v-if="item.icon" />
@@ -50,15 +49,21 @@ defineProps<{
             <SidebarMenuSub>
               <SidebarMenuSubItem v-for="subItem in item.items" :key="subItem.title">
                 <SidebarMenuSubButton as-child>
-                  <a :href="subItem.url">
+                  <NuxtLink :to="subItem.url">
                     <span>{{ subItem.title }}</span>
-                  </a>
+                  </NuxtLink>
                 </SidebarMenuSubButton>
               </SidebarMenuSubItem>
             </SidebarMenuSub>
           </CollapsibleContent>
-        </SidebarMenuItem>
-      </Collapsible>
+        </Collapsible>
+        <SidebarMenuButton v-else as-child>
+          <NuxtLink :to="item.url">
+            <component :is="item.icon" v-if="item.icon" />
+            <span>{{ item.title }}</span>
+          </NuxtLink>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
     </SidebarMenu>
   </SidebarGroup>
 </template>

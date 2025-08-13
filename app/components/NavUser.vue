@@ -27,7 +27,7 @@ import {
   useSidebar,
 } from "~/components/ui/sidebar"
 
-const props = defineProps<{
+defineProps<{
   user: {
     name: string
     email: string
@@ -76,28 +76,28 @@ const { isMobile } = useSidebar()
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem>
+            <DropdownMenuItem @click="() => {}">
               <Sparkles />
               Upgrade to Pro
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem>
+            <DropdownMenuItem @click="() => {}">
               <BadgeCheck />
               Account
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem @click="() => {}">
               <CreditCard />
               Billing
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem @click="() => {}">
               <Bell />
               Notifications
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
+          <DropdownMenuItem @click="() => {}">
             <LogOut />
             Log out
           </DropdownMenuItem>

@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import type { SidebarProps } from "~/components/ui/sidebar"
-
 import {
   AudioWaveform,
-  BookOpen,
   Bot,
   Command,
   Frame,
@@ -13,21 +11,20 @@ import {
   Settings2,
   SquareTerminal,
 } from "lucide-vue-next"
+import Sidebar from "~/components/ui/sidebar/Sidebar.vue"
+import SidebarHeader from "~/components/ui/sidebar/SidebarHeader.vue"
+import TeamSwitcher from "~/components/TeamSwitcher.vue"
+import SidebarContent from "~/components/ui/sidebar/SidebarContent.vue"
 import NavMain from "~/components/NavMain.vue"
 import NavProjects from "~/components/NavProject.vue"
 import NavUser from "~/components/NavUser.vue"
-import TeamSwitcher from "~/components/TeamSwitcher.vue"
+import SidebarFooter from "~/components/ui/sidebar/SidebarFooter.vue"
+import SidebarRail from "~/components/ui/sidebar/SidebarRail.vue"
 
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarRail,
-} from "~/components/ui/sidebar"
 
 const props = withDefaults(defineProps<SidebarProps>(), {
   collapsible: "icon",
+  variant: "sidebar",
 })
 
 // This is sample data.
@@ -35,7 +32,7 @@ const data = {
   user: {
     name: "shadcn",
     email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    avatar: "https://github.com/shadcn.png",
   },
   teams: [
     {
@@ -56,87 +53,62 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
-      url: "#",
+      title: "Dashboard",
+      url: "/dashboard",
       icon: SquareTerminal,
-      isActive: true,
+      isActive: false,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "Overview",
+          url: "/dashboard",
         },
         {
-          title: "Starred",
-          url: "#",
+          title: "Analytics",
+          url: "/dashboard/analytics",
         },
         {
-          title: "Settings",
-          url: "#",
+          title: "Reports",
+          url: "/dashboard/reports",
         },
       ],
     },
     {
-      title: "Models",
-      url: "#",
+      title: "Users",
+      url: "/users",
       icon: Bot,
+      isActive: false,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "All Users",
+          url: "/users",
         },
         {
-          title: "Explorer",
-          url: "#",
+          title: "Add User",
+          url: "/users/create",
         },
         {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
+          title: "User Roles",
+          url: "/users/roles",
         },
       ],
     },
     {
       title: "Settings",
-      url: "#",
+      url: "/settings",
       icon: Settings2,
+      isActive: false,
       items: [
         {
           title: "General",
-          url: "#",
+          url: "/settings",
         },
         {
-          title: "Team",
-          url: "#",
+          title: "Profile",
+          url: "/settings/profile",
         },
         {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
+          title: "Security",
+          url: "/settings/security",
         },
       ],
     },
