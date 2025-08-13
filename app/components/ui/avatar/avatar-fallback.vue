@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import { AvatarFallback } from 'radix-vue'
 import type { AvatarFallbackProps } from 'radix-vue'
-import { cn } from '@/app/lib/utils'
+import { cn } from '../../lib/utils'
 
 const props = defineProps<AvatarFallbackProps & { class?: string }>()
 </script>

@@ -111,7 +111,7 @@ import {
   HelpCircle,
   CreditCard
 } from 'lucide-vue-next'
-import { cn } from '~/app/lib/utils'
+import { cn } from '../lib/utils'
 
 const route = useRoute()
 
