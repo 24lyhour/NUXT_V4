@@ -1,8 +1,18 @@
 <script setup lang="ts">
 import { Menu, Bell, User, CreditCard, Settings, LogOut } from 'lucide-vue-next'
-import AppSidebar from '../components/AppSidebar.vue'
-import SidebarProvider from '../components/ui/sidebar/sidebarProvider.vue'
-import SidebarTrigger from '../components/ui/sidebar/sidebarTrigger.vue'
+import AppSidebar from '~/components/AppSidebar.vue'
+import { SidebarProvider, SidebarTrigger } from '~/components/ui/sidebar'
+import { Button } from '~/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '~/components/ui/dropdown-menu'
+import Avatar from '~/components/ui/avatar/avatar.vue'
+import AvatarFallback from '~/components/ui/avatar/avatarFallback.vue'
+import AvatarImage from '~/components/ui/avatar/avatarImage.vue'
 
 const route = useRoute()
 
