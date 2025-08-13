@@ -6,7 +6,7 @@ export const containerClass = "w-full h-full"
 </script>
 
 <script setup lang="ts">
-import AppSidebar from "@omponents/AppSidebar.vue"
+import AppSidebar from "~/components/appSidebar.vue"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -14,13 +14,15 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/registry/new-york/ui/breadcrumb"
-import { Separator } from "@/registry/new-york/ui/separator"
+} from "~/components/ui/breadcrumb"
+import { Separator } from "~/components/ui/separator"
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/registry/new-york/ui/sidebar"
+} from "~/components/ui/sidebar"
+
+const { breadcrumbs, pageTitle } = useBreadcrumbs()
 </script>
 
 <template>
@@ -34,15 +36,20 @@ import {
           <Separator orientation="vertical" class="mr-2 h-4" />
           <Breadcrumb>
             <BreadcrumbList>
-              <BreadcrumbItem class="hidden md:block">
-                <BreadcrumbLink href="#">
-                  Building Your Application
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator class="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-              </BreadcrumbItem>
+              <template v-for="(breadcrumb, index) in breadcrumbs" :key="index">
+                <BreadcrumbItem v-if="!breadcrumb.isActive" class="hidden md:block">
+                  <BreadcrumbLink :href="breadcrumb.href">
+                    {{ breadcrumb.label }}
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbItem v-else>
+                  <BreadcrumbPage>{{ breadcrumb.label }}</BreadcrumbPage>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator 
+                  v-if="index < breadcrumbs.length - 1" 
+                  class="hidden md:block" 
+                />
+              </template>
             </BreadcrumbList>
           </Breadcrumb>
         </div>

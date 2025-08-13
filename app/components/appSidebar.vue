@@ -17,7 +17,6 @@ import TeamSwitcher from "~/components/TeamSwitcher.vue"
 import SidebarContent from "~/components/ui/sidebar/SidebarContent.vue"
 import NavMain from "~/components/NavMain.vue"
 import NavProjects from "~/components/NavProject.vue"
-import NavSitemap from "~/components/NavSitemap.vue"
 import NavUser from "~/components/NavUser.vue"
 import SidebarFooter from "~/components/ui/sidebar/SidebarFooter.vue"
 import SidebarRail from "~/components/ui/sidebar/SidebarRail.vue"
@@ -59,10 +58,6 @@ const data = {
       icon: SquareTerminal,
       isActive: false,
       items: [
-        {
-          title: "Overview",
-          url: "/dashboard",
-        },
         {
           title: "Analytics",
           url: "/dashboard/analytics",
@@ -142,7 +137,6 @@ const data = {
     <SidebarContent>
       <NavMain :items="data.navMain" />
       <NavProjects :items="data.projects" />
-      <NavSitemap />
     </SidebarContent>
     <SidebarFooter>
       <NavUser :user="data.user" />
