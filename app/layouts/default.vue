@@ -64,20 +64,20 @@ const pageTitle = computed(() => {
                   </div>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem @click="() => {}">
+                <DropdownMenuItem @click="() => { }">
                   <User class="mr-2 h-4 w-4" />
                   <span>Profile</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem @click="() => {}">
+                <DropdownMenuItem @click="() => { }">
                   <CreditCard class="mr-2 h-4 w-4" />
                   <span>Billing</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem @click="() => {}">
+                <DropdownMenuItem @click="() => { }">
                   <Settings class="mr-2 h-4 w-4" />
                   <span>Settings</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem @click="() => {}">
+                <DropdownMenuItem @click="() => { }">
                   <LogOut class="mr-2 h-4 w-4" />
                   <span>Log out</span>
                 </DropdownMenuItem>
@@ -89,9 +89,8 @@ const pageTitle = computed(() => {
 
       <!-- Page content -->
       <div class="flex-1 overflow-y-auto">
-        <div class="container py-6">
-          <slot />
-        </div>
+        <!-- slot content  -->
+        <slot />
       </div>
     </main>
   </SidebarProvider>

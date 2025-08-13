@@ -1,13 +1,7 @@
 <template>
-  <div>
-    
-  </div>
+  <div></div>
 </template>
 
-<script lang="ts" setup>
-
+<script setup lang="ts">
+await navigateTo('/dashboard/tasks')
 </script>
-
-<style>
-
-</style>

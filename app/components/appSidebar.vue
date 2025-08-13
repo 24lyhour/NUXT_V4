@@ -32,7 +32,7 @@ const data = {
   user: {
     name: "shadcn",
     email: "m@example.com",
-    avatar: "https://github.com/shadcn.png",
+    avatar: "https://github.com/github.png",
   },
   teams: [
     {
@@ -63,9 +63,14 @@ const data = {
           url: "/dashboard/analytics",
         },
         {
+          title: "Overviews",
+          url: "/dashboard/tasks"
+        },
+        {
           title: "Reports",
           url: "/dashboard/reports",
         },
+
       ],
     },
     {

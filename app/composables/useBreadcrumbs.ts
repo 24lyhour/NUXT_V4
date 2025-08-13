@@ -9,8 +9,9 @@ interface BreadcrumbItem {
 export const useBreadcrumbs = () => {
   const route = useRoute();
 
-  // Simple page name mapping
+  // Extended page name mapping with hierarchy
   const pageNames: Record<string, string> = {
+    "/": "Home",
     "/dashboard": "Dashboard",
     "/dashboard/analytics": "Analytics",
     "/dashboard/reports": "Reports",
@@ -18,42 +19,61 @@ export const useBreadcrumbs = () => {
     "/settings": "Settings",
   };
 
-  // Get current breadcrumbs - just show current page
+  // Generate full breadcrumb trail
   const breadcrumbs = computed(() => {
-    let currentPath = route.path;
+    const currentPath = route.path.replace(/\/+$/, "") || "/";
+    const segments = currentPath.split("/").filter(Boolean);
+    const items: BreadcrumbItem[] = [];
 
-    // Clean up path - remove trailing slashes
-    currentPath = currentPath.replace(/\/+$/, "") || "/";
-
-    // Get page name from mapping or generate from path
-    let pageName = pageNames[currentPath];
-
-    if (!pageName) {
-      if (currentPath === "/" || currentPath === "") {
-        pageName = "Home";
-      } else {
-        const segments = currentPath.split("/").filter(Boolean);
-        const lastSegment = segments[segments.length - 1];
-        pageName =
-          lastSegment.charAt(0).toUpperCase() +
-          lastSegment.slice(1).replace(/-/g, " ");
-      }
+    // Always add Home as first item unless we're already on home
+    if (currentPath !== "/") {
+      items.push({
+        label: "Home",
+        href: "/",
+      });
     }
 
-    // Debug log to see what's happening
-    console.log(
-      "Breadcrumb - Current path:",
-      currentPath,
-      "Page name:",
-      pageName
-    );
+    // Build breadcrumb trail
+    let accumulatedPath = "";
+    segments.forEach((segment, index) => {
+      accumulatedPath += "/" + segment;
+      const normalizedPath = accumulatedPath;
+      
+      // Get page name from mapping or generate from segment
+      let label = pageNames[normalizedPath];
+      
+      if (!label) {
+        // Format segment: capitalize and replace hyphens with spaces
+        label = segment
+          .split("-")
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ");
+      }
 
-    return [{ label: pageName, isActive: true }];
+      const isLast = index === segments.length - 1;
+      
+      items.push({
+        label,
+        href: isLast ? undefined : normalizedPath,
+        isActive: isLast,
+      });
+    });
+
+    // If we're on home page, just show Home
+    if (currentPath === "/") {
+      items.push({
+        label: "Home",
+        isActive: true,
+      });
+    }
+
+    return items;
   });
 
   // Get page title for the current page
   const pageTitle = computed(() => {
-    return breadcrumbs.value[0]?.label || "Page";
+    const crumbs = breadcrumbs.value;
+    return crumbs[crumbs.length - 1]?.label || "Page";
   });
 
   return {
