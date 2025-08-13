@@ -1,7 +1,7 @@
 <template>
-  <UiSidebar :className="cn('border-r', className)">
-    <UiSidebarHeader>
-      <UiSidebarMenuButton size="lg" asChild>
+  <ui-sidebar-sidebar :className="cn('border-r', className)">
+    <ui-sidebar-sidebar-header>
+      <ui-sidebar-sidebar-menu-button size="lg" asChild>
         <a href="/">
           <div class="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <Package class="size-4" />
@@ -11,89 +11,89 @@
             <span class="text-xs text-muted-foreground">v1.0.0</span>
           </div>
         </a>
-      </UiSidebarMenuButton>
-    </UiSidebarHeader>
+      </ui-sidebar-sidebar-menu-button>
+    </ui-sidebar-sidebar-header>
     
-    <UiSidebarContent>
-      <UiSidebarGroup>
-        <UiSidebarGroupLabel>Application</UiSidebarGroupLabel>
-        <UiSidebarGroupContent>
-          <UiSidebarMenu>
-            <UiSidebarMenuItem v-for="item in applicationItems" :key="item.title">
-              <UiSidebarMenuButton asChild :isActive="route.path === item.url">
+    <ui-sidebar-sidebar-content>
+      <ui-sidebar-sidebar-group>
+        <ui-sidebar-sidebar-group-label>Application</ui-sidebar-sidebar-group-label>
+        <ui-sidebar-sidebar-group-content>
+          <ui-sidebar-sidebar-menu>
+            <ui-sidebar-sidebar-menu-item v-for="item in applicationItems" :key="item.title">
+              <ui-sidebar-sidebar-menu-button asChild :isActive="route.path === item.url">
                 <NuxtLink :to="item.url">
                   <component :is="item.icon" class="size-4" />
                   <span>{{ item.title }}</span>
                 </NuxtLink>
-              </UiSidebarMenuButton>
-            </UiSidebarMenuItem>
-          </UiSidebarMenu>
-        </UiSidebarGroupContent>
-      </UiSidebarGroup>
+              </ui-sidebar-sidebar-menu-button>
+            </ui-sidebar-sidebar-menu-item>
+          </ui-sidebar-sidebar-menu>
+        </ui-sidebar-sidebar-group-content>
+      </ui-sidebar-sidebar-group>
 
-      <UiSidebarGroup>
-        <UiSidebarGroupLabel>Analytics</UiSidebarGroupLabel>
-        <UiSidebarGroupContent>
-          <UiSidebarMenu>
-            <UiCollapsible v-for="item in analyticsItems" :key="item.title" class="group/collapsible">
-              <UiSidebarMenuItem>
-                <UiCollapsibleTrigger asChild>
-                  <UiSidebarMenuButton>
+      <ui-sidebar-sidebar-group>
+        <ui-sidebar-sidebar-group-label>Analytics</ui-sidebar-sidebar-group-label>
+        <ui-sidebar-sidebar-group-content>
+          <ui-sidebar-sidebar-menu>
+            <ui-collapsible-collapsible v-for="item in analyticsItems" :key="item.title" class="group/collapsible">
+              <ui-sidebar-sidebar-menu-item>
+                <ui-collapsible-collapsible-trigger asChild>
+                  <ui-sidebar-sidebar-menu-button>
                     <component :is="item.icon" class="size-4" />
                     <span>{{ item.title }}</span>
                     <ChevronRight class="ml-auto size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                  </UiSidebarMenuButton>
-                </UiCollapsibleTrigger>
-                <UiCollapsibleContent>
-                  <UiSidebarMenu class="ml-4 mt-1">
-                    <UiSidebarMenuItem v-for="subItem in item.items" :key="subItem.title">
-                      <UiSidebarMenuButton asChild :isActive="route.path === subItem.url">
+                  </ui-sidebar-sidebar-menu-button>
+                </ui-collapsible-collapsible-trigger>
+                <ui-collapsible-collapsible-content>
+                  <ui-sidebar-sidebar-menu class="ml-4 mt-1">
+                    <ui-sidebar-sidebar-menu-item v-for="subItem in item.items" :key="subItem.title">
+                      <ui-sidebar-sidebar-menu-button asChild :isActive="route.path === subItem.url">
                         <NuxtLink :to="subItem.url">
                           <span>{{ subItem.title }}</span>
                         </NuxtLink>
-                      </UiSidebarMenuButton>
-                    </UiSidebarMenuItem>
-                  </UiSidebarMenu>
-                </UiCollapsibleContent>
-              </UiSidebarMenuItem>
-            </UiCollapsible>
-          </UiSidebarMenu>
-        </UiSidebarGroupContent>
-      </UiSidebarGroup>
+                      </ui-sidebar-sidebar-menu-button>
+                    </ui-sidebar-sidebar-menu-item>
+                  </ui-sidebar-sidebar-menu>
+                </ui-collapsible-collapsible-content>
+              </ui-sidebar-sidebar-menu-item>
+            </ui-collapsible-collapsible>
+          </ui-sidebar-sidebar-menu>
+        </ui-sidebar-sidebar-group-content>
+      </ui-sidebar-sidebar-group>
 
-      <UiSidebarGroup>
-        <UiSidebarGroupLabel>Settings</UiSidebarGroupLabel>
-        <UiSidebarGroupContent>
-          <UiSidebarMenu>
-            <UiSidebarMenuItem v-for="item in settingsItems" :key="item.title">
-              <UiSidebarMenuButton asChild :isActive="route.path === item.url">
+      <ui-sidebar-sidebar-group>
+        <ui-sidebar-sidebar-group-label>Settings</ui-sidebar-sidebar-group-label>
+        <ui-sidebar-sidebar-group-content>
+          <ui-sidebar-sidebar-menu>
+            <ui-sidebar-sidebar-menu-item v-for="item in settingsItems" :key="item.title">
+              <ui-sidebar-sidebar-menu-button asChild :isActive="route.path === item.url">
                 <NuxtLink :to="item.url">
                   <component :is="item.icon" class="size-4" />
                   <span>{{ item.title }}</span>
                 </NuxtLink>
-              </UiSidebarMenuButton>
-            </UiSidebarMenuItem>
-          </UiSidebarMenu>
-        </UiSidebarGroupContent>
-      </UiSidebarGroup>
-    </UiSidebarContent>
+              </ui-sidebar-sidebar-menu-button>
+            </ui-sidebar-sidebar-menu-item>
+          </ui-sidebar-sidebar-menu>
+        </ui-sidebar-sidebar-group-content>
+      </ui-sidebar-sidebar-group>
+    </ui-sidebar-sidebar-content>
 
     <div class="mt-auto p-4">
-      <UiCard>
-        <UiCardHeader class="p-3">
-          <UiCardTitle class="text-sm">Upgrade to Pro</UiCardTitle>
-        </UiCardHeader>
-        <UiCardContent class="p-3 pt-0">
+      <ui-card-card>
+        <ui-card-card-header class="p-3">
+          <ui-card-card-title class="text-sm">Upgrade to Pro</ui-card-card-title>
+        </ui-card-card-header>
+        <ui-card-card-content class="p-3 pt-0">
           <p class="text-xs text-muted-foreground mb-3">
             Unlock all features and get unlimited access to our support team.
           </p>
-          <UiButton size="sm" class="w-full">
+          <ui-button size="sm" class="w-full">
             Upgrade
-          </UiButton>
-        </UiCardContent>
-      </UiCard>
+          </ui-button>
+        </ui-card-card-content>
+      </ui-card-card>
     </div>
-  </UiSidebar>
+  </ui-sidebar-sidebar>
 </template>
 
 <script setup lang="ts">

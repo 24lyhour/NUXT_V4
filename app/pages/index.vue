@@ -3,98 +3,98 @@
     <div class="flex items-center justify-between space-y-2 mb-8">
       <h2 class="text-3xl font-bold tracking-tight">Dashboard</h2>
       <div class="flex items-center space-x-2">
-        <UiButton>Download Report</UiButton>
+        <ui-button>Download Report</ui-button>
       </div>
     </div>
     
     <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
-      <UiCard>
-        <UiCardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-          <UiCardTitle class="text-sm font-medium">
+      <ui-card-card>
+        <ui-card-card-header class="flex flex-row items-center justify-between space-y-0 pb-2">
+          <ui-card-card-title class="text-sm font-medium">
             Total Revenue
-          </UiCardTitle>
+          </ui-card-card-title>
           <DollarSign class="h-4 w-4 text-muted-foreground" />
-        </UiCardHeader>
-        <UiCardContent>
+        </ui-card-card-header>
+        <ui-card-card-content>
           <div class="text-2xl font-bold">$45,231.89</div>
           <p class="text-xs text-muted-foreground">
             +20.1% from last month
           </p>
-        </UiCardContent>
-      </UiCard>
+        </ui-card-card-content>
+      </ui-card-card>
       
-      <UiCard>
-        <UiCardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-          <UiCardTitle class="text-sm font-medium">
+      <ui-card-card>
+        <ui-card-card-header class="flex flex-row items-center justify-between space-y-0 pb-2">
+          <ui-card-card-title class="text-sm font-medium">
             Subscriptions
-          </UiCardTitle>
+          </ui-card-card-title>
           <Users class="h-4 w-4 text-muted-foreground" />
-        </UiCardHeader>
-        <UiCardContent>
+        </ui-card-card-header>
+        <ui-card-card-content>
           <div class="text-2xl font-bold">+2350</div>
           <p class="text-xs text-muted-foreground">
             +180.1% from last month
           </p>
-        </UiCardContent>
-      </UiCard>
+        </ui-card-card-content>
+      </ui-card-card>
       
-      <UiCard>
-        <UiCardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-          <UiCardTitle class="text-sm font-medium">
+      <ui-card-card>
+        <ui-card-card-header class="flex flex-row items-center justify-between space-y-0 pb-2">
+          <ui-card-card-title class="text-sm font-medium">
             Sales
-          </UiCardTitle>
+          </ui-card-card-title>
           <CreditCard class="h-4 w-4 text-muted-foreground" />
-        </UiCardHeader>
-        <UiCardContent>
+        </ui-card-card-header>
+        <ui-card-card-content>
           <div class="text-2xl font-bold">+12,234</div>
           <p class="text-xs text-muted-foreground">
             +19% from last month
           </p>
-        </UiCardContent>
-      </UiCard>
+        </ui-card-card-content>
+      </ui-card-card>
       
-      <UiCard>
-        <UiCardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-          <UiCardTitle class="text-sm font-medium">
+      <ui-card-card>
+        <ui-card-card-header class="flex flex-row items-center justify-between space-y-0 pb-2">
+          <ui-card-card-title class="text-sm font-medium">
             Active Now
-          </UiCardTitle>
+          </ui-card-card-title>
           <Activity class="h-4 w-4 text-muted-foreground" />
-        </UiCardHeader>
-        <UiCardContent>
+        </ui-card-card-header>
+        <ui-card-card-content>
           <div class="text-2xl font-bold">+573</div>
           <p class="text-xs text-muted-foreground">
             +201 since last hour
           </p>
-        </UiCardContent>
-      </UiCard>
+        </ui-card-card-content>
+      </ui-card-card>
     </div>
     
     <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-      <UiCard class="col-span-4">
-        <UiCardHeader>
-          <UiCardTitle>Overview</UiCardTitle>
-        </UiCardHeader>
-        <UiCardContent class="pl-2">
+      <ui-card-card class="col-span-4">
+        <ui-card-card-header>
+          <ui-card-card-title>Overview</ui-card-card-title>
+        </ui-card-card-header>
+        <ui-card-card-content class="pl-2">
           <div class="h-[350px] flex items-center justify-center text-muted-foreground">
             Chart will be displayed here
           </div>
-        </UiCardContent>
-      </UiCard>
+        </ui-card-card-content>
+      </ui-card-card>
       
-      <UiCard class="col-span-3">
-        <UiCardHeader>
-          <UiCardTitle>Recent Sales</UiCardTitle>
+      <ui-card-card class="col-span-3">
+        <ui-card-card-header>
+          <ui-card-card-title>Recent Sales</ui-card-card-title>
           <p class="text-sm text-muted-foreground">
             You made 265 sales this month.
           </p>
-        </UiCardHeader>
-        <UiCardContent>
+        </ui-card-card-header>
+        <ui-card-card-content>
           <div class="space-y-8">
             <div v-for="sale in recentSales" :key="sale.email" class="flex items-center">
-              <UiAvatar class="h-9 w-9">
-                <UiAvatarImage :src="sale.avatar" :alt="sale.name" />
-                <UiAvatarFallback>{{ sale.initials }}</UiAvatarFallback>
-              </UiAvatar>
+              <ui-avatar-avatar class="h-9 w-9">
+                <ui-avatar-avatar-image :src="sale.avatar" :alt="sale.name" />
+                <ui-avatar-avatar-fallback>{{ sale.initials }}</ui-avatar-avatar-fallback>
+              </ui-avatar-avatar>
               <div class="ml-4 space-y-1">
                 <p class="text-sm font-medium leading-none">{{ sale.name }}</p>
                 <p class="text-sm text-muted-foreground">
@@ -106,8 +106,8 @@
               </div>
             </div>
           </div>
-        </UiCardContent>
-      </UiCard>
+        </ui-card-card-content>
+      </ui-card-card>
     </div>
   </div>
 </template>
