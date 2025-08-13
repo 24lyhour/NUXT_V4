@@ -1,0 +1,16 @@
+<template>
+  <AlertDialogTitle
+    v-bind="props"
+    :class="cn('text-lg font-semibold', $attrs.class ?? '')"
+  >
+    <slot />
+  </AlertDialogTitle>
+</template>
+
+<script setup lang="ts">
+import { AlertDialogTitle } from 'radix-vue'
+import type { AlertDialogTitleProps } from 'radix-vue'
+import { cn } from '@/app/lib/utils'
+
+const props = defineProps<AlertDialogTitleProps>()
+</script>

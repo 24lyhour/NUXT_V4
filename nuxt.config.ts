@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@vueuse/nuxt'],
+  modules: ['@vueuse/nuxt', 'shadcn-nuxt'],
   css: ['./app/assets/css/tailwind.css'],
   alias: {
     '@': '.',
@@ -15,9 +15,20 @@ export default defineNuxtConfig({
       {
         path: './app/components',
         pathPrefix: false,
-        global: true
+        global: true,
+        extensions: ['vue']
+      },
+      {
+        path: './app/components/ui',
+        pathPrefix: false,
+        global: true,
+        extensions: ['vue']
       }
     ]
+  },
+  shadcn: {
+    prefix: '',
+    componentDir: './app/components/ui'
   },
   vite: {
     plugins: [

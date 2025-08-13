@@ -1,17 +1,6 @@
-<template>
-  <button
-    :class="cn(variants({ variant, size }), $attrs.class ?? '')"
-    v-bind="$attrs"
-  >
-    <slot />
-  </button>
-</template>
+import { cva } from 'class-variance-authority'
 
-<script setup lang="ts">
-import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/app/lib/utils'
-
-const variants = cva(
+export const buttonVariants = cva(
   'inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
@@ -40,10 +29,4 @@ const variants = cva(
   }
 )
 
-type ButtonVariants = VariantProps<typeof variants>
-
-defineProps<{
-  variant?: ButtonVariants['variant']
-  size?: ButtonVariants['size']
-}>()
-</script>
+export { default as Button } from './button.vue'
