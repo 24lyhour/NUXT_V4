@@ -42,7 +42,18 @@ This document outlines the setup and fixes applied to integrate ShadCN Vue compo
 - `SidebarSidebar` → `Sidebar`
 - `CollapsibleCollapsible` → `Collapsible`
 
-### 4. Components.json Configuration
+### 4. Component File Naming Convention
+
+**Problem**: Components generated with kebab-case names (with hyphens)
+**Solution**: Renamed all component files to use camelCase convention
+
+Examples of changes made:
+- `card-header.vue` → `cardHeader.vue`
+- `card-content.vue` → `cardContent.vue`
+- `dropdown-menu-item.vue` → `dropdownMenuItem.vue`
+- `alert-dialog-content.vue` → `alertDialogContent.vue`
+
+### 5. Components.json Configuration
 
 **Problem**: ShadCN CLI generating components in wrong paths
 **Solution**: Updated aliases in components.json
@@ -50,16 +61,16 @@ This document outlines the setup and fixes applied to integrate ShadCN Vue compo
 ```json
 {
   "aliases": {
-    "components": "./app/components",
-    "composables": "./app/composables",
-    "utils": "./app/lib/utils",
-    "ui": "./app/components/ui",
-    "lib": "./app/lib"
+    "components": "~/components",
+    "composables": "~/composables", 
+    "utils": "~/lib/utils",
+    "ui": "~/components/ui",
+    "lib": "~/lib"
   }
 }
 ```
 
-### 5. Nuxt Configuration
+### 6. Nuxt Configuration
 
 **Problem**: Component auto-import issues and hydration mismatches
 **Solution**:
@@ -129,7 +140,7 @@ npx shadcn-vue@latest add [component-name]
 1. Always use `~/` alias for imports within the app directory
 2. Components are auto-imported - no need to import them in scripts
 3. Use PascalCase for component names in templates
-4. File names are kebab-case but component names are PascalCase
+4. File names use camelCase convention (e.g., cardHeader.vue, dropdownMenuContent.vue)
 
 ## Troubleshooting
 
