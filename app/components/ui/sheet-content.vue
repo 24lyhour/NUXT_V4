@@ -23,7 +23,7 @@ import { DialogClose, DialogContent, DialogOverlay, DialogPortal } from 'radix-v
 import type { DialogContentProps } from 'radix-vue'
 import { X } from 'lucide-vue-next'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '~/app/lib/utils'
+import { cn } from '@/app/lib/utils'
 
 const props = defineProps<DialogContentProps & { class?: string } & VariantProps<typeof sheetVariants>>()
 

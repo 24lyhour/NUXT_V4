@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import { AvatarRoot } from 'radix-vue'
 import type { AvatarRootProps } from 'radix-vue'
-import { cn } from '~/app/lib/utils'
+import { cn } from '@/app/lib/utils'
 
 const props = defineProps<AvatarRootProps & { class?: string }>()
 </script>

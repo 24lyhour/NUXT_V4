@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import { DropdownMenuSeparator } from 'radix-vue'
 import type { DropdownMenuSeparatorProps } from 'radix-vue'
-import { cn } from '~/app/lib/utils'
+import { cn } from '@/app/lib/utils'
 
 const props = defineProps<DropdownMenuSeparatorProps & { class?: string }>()
 </script>

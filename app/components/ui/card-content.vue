@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { cn } from '~/app/lib/utils'
+import { cn } from '@/app/lib/utils'
 
 const props = defineProps<{
   class?: string

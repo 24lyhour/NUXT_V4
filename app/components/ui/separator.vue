@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import { SeparatorRoot } from 'radix-vue'
 import type { SeparatorRootProps } from 'radix-vue'
-import { cn } from '~/app/lib/utils'
+import { cn } from '@/app/lib/utils'
 
 const props = withDefaults(defineProps<SeparatorRootProps & { class?: string }>(), {
   orientation: 'horizontal',

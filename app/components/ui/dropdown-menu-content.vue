@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { DropdownMenuContent, DropdownMenuPortal } from 'radix-vue'
 import type { DropdownMenuContentProps } from 'radix-vue'
-import { cn } from '~/app/lib/utils'
+import { cn } from '@/app/lib/utils'
 
 const props = withDefaults(
   defineProps<DropdownMenuContentProps & { class?: string }>(),
