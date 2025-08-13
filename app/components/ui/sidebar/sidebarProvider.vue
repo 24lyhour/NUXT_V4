@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import type { HTMLAttributes, Ref } from "vue"
-import { defaultDocument, useEventListener, useMediaQuery, useVModel } from "@vueuse/core"
+import { useEventListener, useMediaQuery, useVModel } from "@vueuse/core"
 import { TooltipProvider } from "reka-ui"
-import { computed, ref } from "vue"
+import { computed, ref, onMounted } from "vue"
 import { cn } from '~/lib/utils'
-import { provideSidebarContext, SIDEBAR_COOKIE_MAX_AGE, SIDEBAR_COOKIE_NAME, SIDEBAR_KEYBOARD_SHORTCUT, SIDEBAR_WIDTH, SIDEBAR_WIDTH_ICON } from "./utils"
+import { provideSidebarContext, SIDEBAR_KEYBOARD_SHORTCUT, SIDEBAR_WIDTH, SIDEBAR_WIDTH_ICON } from "./utils"
 
 const props = withDefaults(defineProps<{
   defaultOpen?: boolean
   open?: boolean
   class?: HTMLAttributes["class"]
 }>(), {
-  defaultOpen: !defaultDocument?.cookie.includes(`${SIDEBAR_COOKIE_NAME}=false`),
+  defaultOpen: true,
   open: undefined,
 })
 
@@ -27,11 +27,30 @@ const open = useVModel(props, "open", emits, {
   passive: (props.open === undefined) as false,
 }) as Ref<boolean>
 
+// Load saved state from localStorage on mount
+onMounted(() => {
+  if (typeof window !== 'undefined') {
+    const saved = localStorage.getItem('sidebar-open')
+    if (saved !== null) {
+      try {
+        const savedState = JSON.parse(saved) // true/false as boolean
+        open.value = savedState
+        console.log(`Loaded sidebar state: ${savedState}`)
+      } catch {
+        open.value = true // default to open
+      }
+    }
+  }
+})
+
 function setOpen(value: boolean) {
   open.value = value // emits('update:open', value)
 
-  // This sets the cookie to keep the sidebar state.
-  document.cookie = `${SIDEBAR_COOKIE_NAME}=${open.value}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`
+  // Save boolean state to localStorage for persistence
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('sidebar-open', JSON.stringify(value))
+    console.log(`Sidebar state saved: ${value}`)
+  }
 }
 
 function setOpenMobile(value: boolean) {

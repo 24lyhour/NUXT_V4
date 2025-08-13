@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { LucideIcon } from "lucide-vue-next"
 import { ChevronRight } from "lucide-vue-next"
-import { ref, watch, computed } from "vue"
+import { watch, reactive, onMounted } from "vue"
 import {
   Collapsible,
   CollapsibleContent,
@@ -31,36 +31,39 @@ const props = defineProps<{
   }[]
 }>()
 
-// Simple reactive states for each item
-const getItemState = (itemTitle: string) => {
-  const storageKey = `nav-${itemTitle}-open`
-  
-  // Initialize from localStorage or default to false
-  const initialValue = typeof window !== 'undefined' 
-    ? localStorage.getItem(storageKey) === 'true' 
-    : false
-    
-  const state = ref(initialValue)
-  
-  // Watch for changes and save to localStorage
-  watch(state, (newValue) => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(storageKey, String(newValue))
-    }
-  })
-  
-  return state
-}
+// Create reactive states object
+const itemStates = reactive<Record<string, boolean>>({})
 
-// Create reactive states for each menu item
-const itemStates = computed(() => {
-  const states: Record<string, any> = {}
+// Initialize all items to false first
+props.items.forEach(item => {
+  if (item.items && item.items.length > 0) {
+    itemStates[item.title] = false
+  }
+})
+
+// Load from localStorage and set up watchers on mounted
+onMounted(() => {
   props.items.forEach(item => {
     if (item.items && item.items.length > 0) {
-      states[item.title] = getItemState(item.title)
+      const storageKey = `nav-${item.title}-open`
+      
+      // Load boolean from localStorage (parse JSON for true boolean)
+      const saved = localStorage.getItem(storageKey)
+      if (saved !== null) {
+        try {
+          itemStates[item.title] = JSON.parse(saved) // true/false as boolean
+        } catch {
+          itemStates[item.title] = false
+        }
+      }
+      
+      // Watch for changes and save boolean to localStorage  
+      watch(() => itemStates[item.title], (newValue: boolean) => {
+        localStorage.setItem(storageKey, JSON.stringify(newValue)) // Store as boolean
+        console.log(`Saved ${item.title}: ${newValue}`)
+      })
     }
   })
-  return states
 })
 </script>
 
