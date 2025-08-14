@@ -123,26 +123,52 @@
           </div>
         </CardHeader>
         <CardContent>
-          <div class="pl-2">
-            <div class="h-[350px]">
-              <!-- Chart Components -->
-              <component
-                :is="chartComponents[chartType]"
-                :data="overviewChartData"
-                :categories="['revenue']"
-                index="month"
-                :colors="['rgb(59, 130, 246)']"
-                :y-formatter="(tick: number) => tick.toLocaleString()"
-                :show-x-axis="true"
-                :show-y-axis="true"
-                :show-legend="false"
-                :show-tooltip="true"
-                :show-grid-line="true"
-                :show-gradiant="chartType === 'area'"
-                :margin="{ left: 12, right: 12 }"
-                class="mt-4 h-[300px] w-full"
-              />
-            </div>
+          <div class="h-[350px]">
+            <BarChart
+              v-if="chartType === 'bar'"
+              :data="chartDataForComponents"
+              :categories="['revenue']"
+              index="month"
+              :colors="['#3b82f6']"
+              :show-x-axis="true"
+              :show-y-axis="true"
+              :show-legend="false"
+              :show-tooltip="true"
+              :show-grid-line="true"
+              :margin="{ top: 10, right: 10, bottom: 40, left: 40 }"
+              class="h-full w-full"
+            />
+
+            <AreaChart
+              v-else-if="chartType === 'area'"
+              :data="chartDataForComponents"
+              :categories="['revenue']"
+              index="month"
+              :colors="['#3b82f6']"
+              :show-x-axis="true"
+              :show-y-axis="true"
+              :show-legend="false"
+              :show-tooltip="true"
+              :show-grid-line="true"
+              :show-gradiant="true"
+              :margin="{ top: 10, right: 10, bottom: 40, left: 40 }"
+              class="h-full w-full"
+            />
+
+            <LineChart
+              v-else-if="chartType === 'line'"
+              :data="chartDataForComponents"
+              :categories="['revenue']"
+              index="month"
+              :colors="['#3b82f6']"
+              :show-x-axis="true"
+              :show-y-axis="true"
+              :show-legend="false"
+              :show-tooltip="true"
+              :show-grid-line="true"
+              :margin="{ top: 10, right: 10, bottom: 40, left: 40 }"
+              class="h-full w-full"
+            />
           </div>
         </CardContent>
       </Card>
@@ -186,15 +212,8 @@ import { LineChart } from "~/components/ui/chart-line"
 
 const chartType = ref<'bar' | 'area' | 'line'>('bar')
 
-// Chart components mapping
-const chartComponents = {
-  bar: BarChart,
-  area: AreaChart,
-  line: LineChart
-}
-
-// Data formatted for chart components
-const overviewChartData = ref([
+// Chart data for ShadCN Vue components
+const chartDataForComponents = ref([
   { month: 'Jan', revenue: 3200 },
   { month: 'Feb', revenue: 3800 },
   { month: 'Mar', revenue: 2800 },
@@ -242,3 +261,58 @@ const recentSales = ref([
   }
 ])
 </script>
+
+<style>
+/* Unovis chart styling variables */
+:root {
+  --vis-axis-tick-color: hsl(var(--muted-foreground));
+  --vis-axis-tick-label-color: hsl(var(--muted-foreground)); 
+  --vis-axis-label-color: hsl(var(--muted-foreground));
+  --vis-axis-grid-color: hsl(var(--border));
+  --vis-axis-tick-text-color: hsl(var(--muted-foreground));
+  --vis-text-color: hsl(var(--muted-foreground));
+  --vis-axis-domain-color: hsl(var(--border));
+  --vis-tooltip-background-color: hsl(var(--popover));
+  --vis-tooltip-text-color: hsl(var(--popover-foreground));
+  --vis-tooltip-border-color: hsl(var(--border));
+}
+
+/* Fix axis text visibility */
+.vis-axis text,
+.vis-axis-tick text,
+.vis-axis-label,
+.vis-axis-tick-label {
+  fill: hsl(var(--muted-foreground)) !important;
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* Fix grid lines */
+.vis-axis-grid-line {
+  stroke: hsl(var(--border)) !important;
+  stroke-opacity: 0.5;
+}
+
+/* Fix tooltip styles */
+.vis-tooltip,
+.vis-crosshair-container {
+  position: absolute;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.vis-tooltip-container {
+  position: absolute;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Ensure text elements are visible */
+.vis-xy-container text {
+  fill: hsl(var(--muted-foreground)) !important;
+}
+
+/* Fix bar hover */
+.vis-bar:hover {
+  opacity: 0.8;
+}
+</style>

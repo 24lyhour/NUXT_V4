@@ -116,7 +116,12 @@ function handleLegendItemClick(d: BulletLegendItemInterface, i: number) {
         :tick-format="xFormatter ?? ((v: number) => data[v]?.[index])"
         :grid-line="false"
         :tick-line="false"
-        tick-text-color="hsl(var(--vis-text-color))"
+        :tick-text-color="'var(--vis-axis-tick-text-color)'"
+        :attributes="{
+          [Axis.selectors.tickText]: {
+            style: 'fill: var(--vis-axis-tick-text-color);'
+          }
+        }"
       />
       <VisAxis
         v-if="showYAxis"
@@ -125,12 +130,15 @@ function handleLegendItemClick(d: BulletLegendItemInterface, i: number) {
         :tick-format="yFormatter"
         :domain-line="false"
         :grid-line="showGridLine"
+        :tick-text-color="'var(--vis-axis-tick-text-color)'"
         :attributes="{
           [Axis.selectors.grid]: {
             class: 'text-muted',
           },
+          [Axis.selectors.tickText]: {
+            style: 'fill: var(--vis-axis-tick-text-color);'
+          }
         }"
-        tick-text-color="hsl(var(--vis-text-color))"
       />
 
       <slot />

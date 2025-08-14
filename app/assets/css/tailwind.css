@@ -176,4 +176,50 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Unovis chart variables and styles */
+  :root {
+    --vis-axis-tick-color: hsl(var(--muted-foreground));
+    --vis-axis-tick-label-color: hsl(var(--muted-foreground)); 
+    --vis-axis-label-color: hsl(var(--muted-foreground));
+    --vis-axis-grid-color: hsl(var(--border));
+    --vis-axis-tick-text-color: hsl(var(--muted-foreground));
+    --vis-text-color: hsl(var(--muted-foreground));
+    --vis-axis-domain-color: hsl(var(--border));
+    --vis-tooltip-background-color: hsl(var(--popover));
+    --vis-tooltip-text-color: hsl(var(--popover-foreground));
+    --vis-tooltip-border-color: hsl(var(--border));
+    --vis-crosshair-line-stroke-color: hsl(var(--muted-foreground));
+  }
+  
+  /* Fix Unovis chart text visibility */
+  .vis-axis text,
+  .vis-axis-tick text,
+  .vis-axis-label,
+  .vis-axis-tick-label,
+  .vis-xy-container text {
+    fill: hsl(var(--muted-foreground)) !important;
+  }
+  
+  /* Fix grid lines */
+  .vis-axis-grid-line {
+    stroke: hsl(var(--border)) !important;
+    stroke-opacity: 0.5;
+  }
+  
+  /* Fix crosshair lines */
+  .vis-crosshair-line {
+    stroke: hsl(var(--muted-foreground)) !important;
+    stroke-width: 1;
+    stroke-dasharray: 4 2;
+  }
+  
+  /* Tooltip container styles */
+  .vis-tooltip,
+  .vis-crosshair-container,
+  .vis-tooltip-container {
+    position: absolute !important;
+    pointer-events: none !important;
+    z-index: 9999 !important;
+  }
 }

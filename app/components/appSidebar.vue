@@ -84,8 +84,8 @@ const data = {
           url: "/users",
         },
         {
-          title: "User Roles",
-          url: "/roles",
+          title: "Memberships",
+          url: "/memberships",
         },
       ],
     },
