@@ -130,8 +130,17 @@
               :data="overviewChartData"
               :categories="['revenue']"
               index="month"
-              :y-formatter="(value) => `$${(value / 1000).toFixed(0)}k`"
-              class="h-full"
+              :x-formatter="(value: number, i: number) => overviewChartData[value]?.month || value"
+              :y-formatter="(value: number) => `$${(value / 1000).toFixed(0)}k`"
+              :show-x-axis="true"
+              :show-y-axis="true"
+              :show-tooltip="true"
+              :show-legend="false"
+              :show-grid-line="true"
+              :colors="['rgb(59, 130, 246)']"
+              :margin="{ top: 20, right: 20, bottom: 40, left: 60 }"
+              :custom-tooltip="ChartTooltip"
+              class="h-full w-full"
             />
             
             <!-- Area Chart -->
@@ -140,8 +149,18 @@
               :data="overviewChartData"
               :categories="['revenue']"
               index="month"
-              :y-formatter="(value) => `$${(value / 1000).toFixed(0)}k`"
-              class="h-full"
+              :x-formatter="(value: number, i: number) => overviewChartData[value]?.month || value"
+              :y-formatter="(value: number) => `$${(value / 1000).toFixed(0)}k`"
+              :show-x-axis="true"
+              :show-y-axis="true"
+              :show-tooltip="true"
+              :show-legend="false"
+              :show-grid-line="true"
+              :show-gradiant="true"
+              :colors="['rgb(59, 130, 246)']"
+              :margin="{ top: 20, right: 20, bottom: 40, left: 60 }"
+              :custom-tooltip="ChartTooltip"
+              class="h-full w-full"
             />
             
             <!-- Line Chart -->
@@ -150,8 +169,17 @@
               :data="overviewChartData"
               :categories="['revenue']"
               index="month"
-              :y-formatter="(value) => `$${(value / 1000).toFixed(0)}k`"
-              class="h-full"
+              :x-formatter="(value: number, i: number) => overviewChartData[value]?.month || value"
+              :y-formatter="(value: number) => `$${(value / 1000).toFixed(0)}k`"
+              :show-x-axis="true"
+              :show-y-axis="true"
+              :show-tooltip="true"
+              :show-legend="false"
+              :show-grid-line="true"
+              :colors="['rgb(59, 130, 246)']"
+              :margin="{ top: 20, right: 20, bottom: 40, left: 60 }"
+              :custom-tooltip="ChartTooltip"
+              class="h-full w-full"
             />
           </div>
         </CardContent>
@@ -193,6 +221,7 @@ import { ref } from 'vue'
 import { BarChart } from "~/components/ui/chart-bar"
 import { AreaChart } from "~/components/ui/chart-area"
 import { LineChart } from "~/components/ui/chart-line"
+import ChartTooltip from "~/components/ChartTooltip.vue"
 
 const chartType = ref<'bar' | 'area' | 'line'>('bar')
 
