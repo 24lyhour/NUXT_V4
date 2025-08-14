@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-await navigateTo('/dashboard/tasks')
+await navigateTo('/dashboard/overview')
 </script>

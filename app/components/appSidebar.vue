@@ -64,7 +64,7 @@ const data = {
         },
         {
           title: "Overviews",
-          url: "/dashboard/tasks"
+          url: "/dashboard/overviews"
         },
         {
           title: "Reports",
