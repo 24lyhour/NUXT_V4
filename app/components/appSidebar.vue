@@ -84,12 +84,8 @@ const data = {
           url: "/users",
         },
         {
-          title: "Add User",
-          url: "/users/create",
-        },
-        {
           title: "User Roles",
-          url: "/users/roles",
+          url: "/roles",
         },
       ],
     },

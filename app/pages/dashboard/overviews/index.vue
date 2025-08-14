@@ -123,64 +123,26 @@
           </div>
         </CardHeader>
         <CardContent>
-          <div class="h-[350px]">
-            <!-- Bar Chart -->
-            <BarChart
-              v-if="chartType === 'bar'"
-              :data="overviewChartData"
-              :categories="['revenue']"
-              index="month"
-              :x-formatter="(value: number, i: number) => overviewChartData[value]?.month || value"
-              :y-formatter="(value: number) => `$${(value / 1000).toFixed(0)}k`"
-              :show-x-axis="true"
-              :show-y-axis="true"
-              :show-tooltip="true"
-              :show-legend="false"
-              :show-grid-line="true"
-              :colors="['rgb(59, 130, 246)']"
-              :margin="{ top: 20, right: 20, bottom: 40, left: 60 }"
-              :custom-tooltip="ChartTooltip"
-              class="h-full w-full"
-            />
-            
-            <!-- Area Chart -->
-            <AreaChart
-              v-else-if="chartType === 'area'"
-              :data="overviewChartData"
-              :categories="['revenue']"
-              index="month"
-              :x-formatter="(value: number, i: number) => overviewChartData[value]?.month || value"
-              :y-formatter="(value: number) => `$${(value / 1000).toFixed(0)}k`"
-              :show-x-axis="true"
-              :show-y-axis="true"
-              :show-tooltip="true"
-              :show-legend="false"
-              :show-grid-line="true"
-              :show-gradiant="true"
-              :colors="['rgb(59, 130, 246)']"
-              :margin="{ top: 20, right: 20, bottom: 40, left: 60 }"
-              :custom-tooltip="ChartTooltip"
-              class="h-full w-full"
-            />
-            
-            <!-- Line Chart -->
-            <LineChart
-              v-else-if="chartType === 'line'"
-              :data="overviewChartData"
-              :categories="['revenue']"
-              index="month"
-              :x-formatter="(value: number, i: number) => overviewChartData[value]?.month || value"
-              :y-formatter="(value: number) => `$${(value / 1000).toFixed(0)}k`"
-              :show-x-axis="true"
-              :show-y-axis="true"
-              :show-tooltip="true"
-              :show-legend="false"
-              :show-grid-line="true"
-              :colors="['rgb(59, 130, 246)']"
-              :margin="{ top: 20, right: 20, bottom: 40, left: 60 }"
-              :custom-tooltip="ChartTooltip"
-              class="h-full w-full"
-            />
+          <div class="pl-2">
+            <div class="h-[350px]">
+              <!-- Chart Components -->
+              <component
+                :is="chartComponents[chartType]"
+                :data="overviewChartData"
+                :categories="['revenue']"
+                index="month"
+                :colors="['rgb(59, 130, 246)']"
+                :y-formatter="(tick: number) => tick.toLocaleString()"
+                :show-x-axis="true"
+                :show-y-axis="true"
+                :show-legend="false"
+                :show-tooltip="true"
+                :show-grid-line="true"
+                :show-gradiant="chartType === 'area'"
+                :margin="{ left: 12, right: 12 }"
+                class="mt-4 h-[300px] w-full"
+              />
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -221,24 +183,30 @@ import { ref } from 'vue'
 import { BarChart } from "~/components/ui/chart-bar"
 import { AreaChart } from "~/components/ui/chart-area"
 import { LineChart } from "~/components/ui/chart-line"
-import ChartTooltip from "~/components/ChartTooltip.vue"
 
 const chartType = ref<'bar' | 'area' | 'line'>('bar')
 
+// Chart components mapping
+const chartComponents = {
+  bar: BarChart,
+  area: AreaChart,
+  line: LineChart
+}
+
 // Data formatted for chart components
 const overviewChartData = ref([
-  { month: 'Jan', revenue: 26000 },
-  { month: 'Feb', revenue: 32000 },
-  { month: 'Mar', revenue: 18000 },
-  { month: 'Apr', revenue: 28000 },
-  { month: 'May', revenue: 36000 },
-  { month: 'Jun', revenue: 22000 },
-  { month: 'Jul', revenue: 30000 },
-  { month: 'Aug', revenue: 34000 },
-  { month: 'Sep', revenue: 24000 },
-  { month: 'Oct', revenue: 31200 },
-  { month: 'Nov', revenue: 36800 },
-  { month: 'Dec', revenue: 35200 }
+  { month: 'Jan', revenue: 3200 },
+  { month: 'Feb', revenue: 3800 },
+  { month: 'Mar', revenue: 2800 },
+  { month: 'Apr', revenue: 3600 },
+  { month: 'May', revenue: 4200 },
+  { month: 'Jun', revenue: 3100 },
+  { month: 'Jul', revenue: 3900 },
+  { month: 'Aug', revenue: 4300 },
+  { month: 'Sep', revenue: 3400 },
+  { month: 'Oct', revenue: 4100 },
+  { month: 'Nov', revenue: 4800 },
+  { month: 'Dec', revenue: 4500 }
 ])
 
 const recentSales = ref([

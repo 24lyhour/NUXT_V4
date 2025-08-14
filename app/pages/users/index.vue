@@ -11,7 +11,7 @@ const router = useRouter();
  * Show details user
  */
 const handleShow = () => {
-  router.push(`/users/${uuid}/`)
+  router.push({ path: `/users/${uuid}` }) // removed trailing slash
 }
 
 </script>
