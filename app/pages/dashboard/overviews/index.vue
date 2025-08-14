@@ -123,104 +123,36 @@
           </div>
         </CardHeader>
         <CardContent>
-          <div class="h-[350px] pl-8">
-            <div class="h-full w-full">
-              <!-- Bar Chart -->
-              <div v-if="chartType === 'bar'" class="relative h-[280px] w-full">
-                <div class="absolute inset-0 flex items-end justify-between px-2">
-                  <div v-for="(bar, i) in chartData" :key="i" class="relative flex-1 mx-0.5">
-                    <div 
-                      :style="{ height: bar.height + '%' }" 
-                      class="w-full bg-blue-500 dark:bg-blue-600 rounded-t transition-all duration-500 hover:bg-blue-600 dark:hover:bg-blue-700 relative group"
-                    >
-                      <div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-900 text-white px-2 py-1 rounded text-xs whitespace-nowrap">
-                        ${{ bar.value }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Y-axis labels -->
-                <div class="absolute left-0 top-0 h-full flex flex-col justify-between text-[10px] text-muted-foreground pl-2">
-                  <span>40k</span>
-                  <span>30k</span>
-                  <span>20k</span>
-                  <span>10k</span>
-                  <span>0</span>
-                </div>
-              </div>
-              
-              <!-- Area Chart -->
-              <div v-else-if="chartType === 'area'" class="relative h-[280px] w-full">
-                <div class="absolute inset-0 flex items-end justify-between px-2">
-                  <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="none">
-                    <defs>
-                      <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:rgb(59, 130, 246);stop-opacity:0.6" />
-                        <stop offset="100%" style="stop-color:rgb(59, 130, 246);stop-opacity:0.05" />
-                      </linearGradient>
-                    </defs>
-                    <path
-                      :d="generateAreaPath()"
-                      fill="url(#areaGradient)"
-                      stroke="rgb(59, 130, 246)"
-                      stroke-width="2"
-                    />
-                  </svg>
-                </div>
-                <!-- Y-axis labels -->
-                <div class="absolute left-0 top-0 h-full flex flex-col justify-between text-[10px] text-muted-foreground pl-2">
-                  <span>40k</span>
-                  <span>30k</span>
-                  <span>20k</span>
-                  <span>10k</span>
-                  <span>0</span>
-                </div>
-              </div>
-              
-              <!-- Line Chart -->
-              <div v-else-if="chartType === 'line'" class="relative h-[280px] w-full">
-                <div class="absolute inset-0">
-                  <svg class="w-full h-full" preserveAspectRatio="none">
-                    <polyline
-                      :points="generateLinePoints()"
-                      fill="none"
-                      stroke="rgb(59, 130, 246)"
-                      stroke-width="2"
-                    />
-                    <g>
-                      <circle
-                        v-for="(point, i) in chartData"
-                        :key="i"
-                        :cx="getPointX(i) + '%'"
-                        :cy="getPointY(point.height) + '%'"
-                        r="4"
-                        fill="white"
-                        stroke="rgb(59, 130, 246)"
-                        stroke-width="2"
-                        class="cursor-pointer"
-                      >
-                        <title>${{ point.value }}</title>
-                      </circle>
-                    </g>
-                  </svg>
-                </div>
-                <!-- Y-axis labels -->
-                <div class="absolute left-0 top-0 h-full flex flex-col justify-between text-[10px] text-muted-foreground pl-2">
-                  <span>40k</span>
-                  <span>30k</span>
-                  <span>20k</span>
-                  <span>10k</span>
-                  <span>0</span>
-                </div>
-              </div>
-              
-              <!-- X-axis labels -->
-              <div class="flex justify-between px-2 mt-4">
-                <div v-for="(bar, i) in chartData" :key="i" class="flex-1 text-center">
-                  <p class="text-[10px] text-muted-foreground">{{ bar.label }}</p>
-                </div>
-              </div>
-            </div>
+          <div class="h-[350px]">
+            <!-- Bar Chart -->
+            <BarChart
+              v-if="chartType === 'bar'"
+              :data="overviewChartData"
+              :categories="['revenue']"
+              index="month"
+              :y-formatter="(value) => `$${(value / 1000).toFixed(0)}k`"
+              class="h-full"
+            />
+            
+            <!-- Area Chart -->
+            <AreaChart
+              v-else-if="chartType === 'area'"
+              :data="overviewChartData"
+              :categories="['revenue']"
+              index="month"
+              :y-formatter="(value) => `$${(value / 1000).toFixed(0)}k`"
+              class="h-full"
+            />
+            
+            <!-- Line Chart -->
+            <LineChart
+              v-else-if="chartType === 'line'"
+              :data="overviewChartData"
+              :categories="['revenue']"
+              index="month"
+              :y-formatter="(value) => `$${(value / 1000).toFixed(0)}k`"
+              class="h-full"
+            />
           </div>
         </CardContent>
       </Card>
@@ -257,50 +189,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
+import { BarChart } from "~/components/ui/chart-bar"
+import { AreaChart } from "~/components/ui/chart-area"
+import { LineChart } from "~/components/ui/chart-line"
 
 const chartType = ref<'bar' | 'area' | 'line'>('bar')
 
-const chartData = ref([
-  { label: 'Jan', height: 65, value: '26,000' },
-  { label: 'Feb', height: 80, value: '32,000' },
-  { label: 'Mar', height: 45, value: '18,000' },
-  { label: 'Apr', height: 70, value: '28,000' },
-  { label: 'May', height: 90, value: '36,000' },
-  { label: 'Jun', height: 55, value: '22,000' },
-  { label: 'Jul', height: 75, value: '30,000' },
-  { label: 'Aug', height: 85, value: '34,000' },
-  { label: 'Sep', height: 60, value: '24,000' },
-  { label: 'Oct', height: 78, value: '31,200' },
-  { label: 'Nov', height: 92, value: '36,800' },
-  { label: 'Dec', height: 88, value: '35,200' }
+// Data formatted for chart components
+const overviewChartData = ref([
+  { month: 'Jan', revenue: 26000 },
+  { month: 'Feb', revenue: 32000 },
+  { month: 'Mar', revenue: 18000 },
+  { month: 'Apr', revenue: 28000 },
+  { month: 'May', revenue: 36000 },
+  { month: 'Jun', revenue: 22000 },
+  { month: 'Jul', revenue: 30000 },
+  { month: 'Aug', revenue: 34000 },
+  { month: 'Sep', revenue: 24000 },
+  { month: 'Oct', revenue: 31200 },
+  { month: 'Nov', revenue: 36800 },
+  { month: 'Dec', revenue: 35200 }
 ])
-
-// Chart helper functions
-const getPointX = (index: number) => {
-  return (index / (chartData.value.length - 1)) * 100
-}
-
-const getPointY = (height: number) => {
-  return 100 - height
-}
-
-const generateAreaPath = () => {
-  const points = chartData.value.map((point, i) => {
-    const x = getPointX(i)
-    const y = getPointY(point.height)
-    return `${x},${y}`
-  })
-  return `M 0,100 L ${points.join(' L ')} L 100,100 Z`
-}
-
-const generateLinePoints = () => {
-  return chartData.value.map((point, i) => {
-    const x = getPointX(i)
-    const y = getPointY(point.height)
-    return `${x},${y}`
-  }).join(' ')
-}
 
 const recentSales = ref([
   {
